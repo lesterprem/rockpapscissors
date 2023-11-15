@@ -7,9 +7,18 @@
 </head>
 <body>
     <script>
-        console.log("Hello World!");
-        let x = Math.random();
-        console.log(getComputerChoice(x));
+        let userIn=prompt("Make your choice. Enter 1 for rock, 2 for paper and 3 for scissors");
+        let userOut= userChoice(userIn);
+        console.log("Your choice = "+ userOut);
+        if (userOut=== userIn) {
+            console.log("Wrong input. Refresh page and try again");
+        } else {
+            let x = Math.random();
+            let computerChoice= getComputerChoice(x);
+            console.log("Computer choice = " + computerChoice);
+            console.log(decideWinner(userOut,computerChoice));
+        };
+        
         function getComputerChoice(num) {
             if(num<= 0.33){
                 return("Rock");
@@ -19,6 +28,29 @@
                 return("Scissors");
             }
         }
+
+        function userChoice(x){
+            if(x==1){
+                return("Rock");
+            } else if(x==2){
+                return("Paper");
+            } else if(x==3){
+                return("Scissors");
+            } else {
+                return x;
+            }
+        }
+
+        function decideWinner(x,y){
+            if(x===y){
+                console.log("It's a draw!");
+            } else if ((x==="Rock" && y=="Scissors") || (x=="Scissors" && y == "Paper") || (x=="Paper" && y == "Rock")){
+                console.log("You win!");
+            }
+            else {
+                    console.log("Sorry, you lose!");
+                }
+            }
     </script> 
     
 </body>
