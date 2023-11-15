@@ -7,17 +7,23 @@
 </head>
 <body>
     <script>
-        let userIn=prompt("Make your choice. Enter 1 for rock, 2 for paper and 3 for scissors");
+        let i = 0;
+        while (i < 5){
+            let userIn=prompt("Make your choice. Enter 1 for rock, 2 for paper and 3 for scissors");
         let userOut= userChoice(userIn);
         console.log("Your choice = "+ userOut);
         if (userOut=== userIn) {
             console.log("Wrong input. Refresh page and try again");
+            i++;
         } else {
             let x = Math.random();
             let computerChoice= getComputerChoice(x);
             console.log("Computer choice = " + computerChoice);
-            console.log(decideWinner(userOut,computerChoice));
+            decideWinner(userOut,computerChoice);
+            i++;
         };
+
+        }
         
         function getComputerChoice(num) {
             if(num<= 0.33){
