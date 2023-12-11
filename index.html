@@ -6,55 +6,55 @@
     <title>Document</title>
 </head>
 <body>
+    <h1 class="gameround">Play round 1</h1>
+    <button class="rock">Rock</button>
+    <button class="paper">Paper</button>
+    <button class="scissors">Scissors</button>
+    <h2 class ="result">Results</h2>
     <script>
-        let i = 0;
-        while (i < 5){
-            let userIn=prompt("Make your choice. Enter 1 for rock, 2 for paper and 3 for scissors");
-        let userOut= userChoice(userIn);
-        console.log("Your choice = "+ userOut);
-        if (userOut=== userIn) {
-            console.log("Wrong input. Refresh page and try again");
-            i++;
-        } else {
-            let x = Math.random();
-            let computerChoice= getComputerChoice(x);
-            console.log("Computer choice = " + computerChoice);
-            decideWinner(userOut,computerChoice);
-            i++;
-        };
+        let results=[];
+        let playerScore=0;
+        let compScore=0;
+        let round=0;
+        const round_title= document.querySelector('.gameround');
+        const gameRound= document.querySelector(".gameround")
+        const buttonRock= document.querySelector(".rock");
+        const buttonPaper= document.querySelector(".paper");
+        const buttonScissors= document.querySelector(".scissors");
+        results.push(buttonRock.addEventListener("click",() => playRound("Rock",round)));
+        results.push(buttonPaper.addEventListener("click",()=> playRound("Paper",round)));
+        results.push(buttonScissors.addEventListener("click",()=> playRound("Scissors",round)));
 
+        for(;round<5;round++){
+        round_title.textContent= 'Play round ' + round + 'of 5';
+        console.table(results);
+    }
+        function playRound(playerChoice, roundNum){
+            let computerChoice=getComputerChoice(Math.random());
+            return decideWinner(playerChoice,computerChoice);
+        }
+
+        function getComputerChoice(num) {
+            if(num<= 1/3){
+                return("Rock");
+            } else if(num<=2/3){
+                return("Paper");
+            } else {
+                return("Scissors");
+            }
         }
         
-        function getComputerChoice(num) {
-            if(num<= 0.33){
-                return("Rock");
-            } else if(num<=0.66){
-                return("Paper");
-            } else {
-                return("Scissors");
-            }
-        }
-
-        function userChoice(x){
-            if(x==1){
-                return("Rock");
-            } else if(x==2){
-                return("Paper");
-            } else if(x==3){
-                return("Scissors");
-            } else {
-                return x;
-            }
-        }
-
         function decideWinner(x,y){
             if(x===y){
-                console.log("It's a draw!");
+                return 'Draw';
             } else if ((x==="Rock" && y=="Scissors") || (x=="Scissors" && y == "Paper") || (x=="Paper" && y == "Rock")){
-                console.log("You win!");
+                playerScore+=1;
+                return 'You';
             }
             else {
                     console.log("Sorry, you lose!");
+                    compScore+=1;
+                    return 'Computer';
                 }
             }
     </script> 
